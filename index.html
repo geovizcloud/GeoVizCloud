@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>GeoVis - Cloud-based 5D-Geovisualization</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top"><span class="banner-small">NASA WORLD WIND Europa Challenge 2015</span> | <span class="banner-highlight">GeoVis</span> - Cloud-based 5D-Geovisualization</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#functions">Functions</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>An Online Visualization Framework for Multi-Dimensional GeoSpatial Data</h1>
+                <br/><br/><br/><br/>
+                <p>
+                    GeoVis applies visual analytics to Multi-Dimensional GeoSpatial data <br/>using Web World Wind for efficient GeoVisualization of massive climate data
+                </p>
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">About the Project</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Project Features</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-cloud wow bounceIn text-primary"></i>
+                        <h3>Cloud Environment</h3>
+                        <p class="text-muted">Deployed within a <span class="highlight">cloud environment</span> to improve the accessibility of visualization services.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-video-camera wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>Animation Visualization</h3>
+                        <p class="text-muted">Providing fundamental visualization functions with 2D and 3D <span class="highlight">animation<span>.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-cubes wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3>3D Volumetric Rendering</h3>
+                        <p class="text-muted">Providing <span class="highlight">3D volumetric rendering</span>, utilizing the emergent <a href="http://en.wikipedia.org/wiki/CUDA" target="_blank">CUDA</a> technique to improve the efficiency of the visualization pipeline.</p>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <iframe width="800" height="430" src="https://www.youtube.com/embed/VGx7Xe8MKpI?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                    <!--
+                    <iframe src="https://player.vimeo.com/video/128216339?color=f05000&title=0&byline=0&portrait=0" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-padding" id="functions">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-sm-6 function-container">
+                    <a href="#functionModal1" class="portfolio-box" data-toggle="modal">
+                        <img src="img/function/function1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Function 1
+                                </div>
+                                <div class="project-name">
+                                    Function Description
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 function-container">
+                    <a href="#functionModal2" class="portfolio-box" data-toggle="modal">
+                        <img src="img/function/function1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Function 2
+                                </div>
+                                <div class="project-name">
+                                    Function Description
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 function-container">
+                    <a href="#functionModal3" class="portfolio-box" data-toggle="modal">
+                        <img src="img/function/function1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Function 3
+                                </div>
+                                <div class="project-name">
+                                    Function Description
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 function-container">
+                    <a href="#functionModal4" class="portfolio-box" data-toggle="modal">
+                        <img src="img/function/function1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Function 4
+                                </div>
+                                <div class="project-name">
+                                    Function Description
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 function-container">
+                    <a href="#functionModal5" class="portfolio-box" data-toggle="modal">
+                        <img src="img/function/function1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Function 5
+                                </div>
+                                <div class="project-name">
+                                    Function Description
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 function-container">
+                    <a href="#functionModal6" class="portfolio-box" data-toggle="modal">
+                        <img src="img/function/function1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Function 6
+                                </div>
+                                <div class="project-name">
+                                    Function Description
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>We are on GitHub!</h2>
+                <a href="https://github.com/qliu/GeoVis" class="btn btn-default btn-xl wow tada" target="_blank"><i class="fa fa-lg fa-github"></i> Project Repository</a>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Contact GeoVis</h2>
+                    <hr class="primary">
+                    <p>Please contact us with any questions.</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                    <p>123-456-6789</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p><a href="mailto:geovis@du.edu">geovis@du.edu</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Function Modals -->
+    <!-- Function 1 Modal -->
+    <div class="modal fade" id="functionModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                            <h2>Function 1</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/function/function1.png" alt="">
+                            <br/>
+                            <p>
+                                Function description goes here
+                            </p>
+                            <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+                            </p>
+                            <p>
+                                Some sample code
+                            </p>
+                            <div class="well">
+                                <code>
+                                    var wwd = new WorldWind.WorldWindow("canvasOne");<br/>
+                                    var layers = [<br/>
+                                        {layer: new WorldWind.BMNGLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},<br/>
+                                        {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},<br/>
+                                        {layer: new WorldWind.CompassLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}<br/>
+                                    ];
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Function 2 Modal -->
+    <div class="modal fade" id="functionModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                            <h2>Function 2</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/function/function2.png" alt="">
+                            <br/>
+                            <p>
+                                Function description goes here
+                            </p>
+                            <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+                            </p>
+                            <p>
+                                Some sample code
+                            </p>
+                            <div class="well">
+                                <code>
+                                    var wwd = new WorldWind.WorldWindow("canvasOne");<br/>
+                                    var layers = [<br/>
+                                        {layer: new WorldWind.BMNGLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},<br/>
+                                        {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},<br/>
+                                        {layer: new WorldWind.CompassLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}<br/>
+                                    ];
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Function 3 Modal -->
+    <div class="modal fade" id="functionModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                            <h2>Function 3</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/function/function3.png" alt="">
+                            <br/>
+                            <p>
+                                Function description goes here
+                            </p>
+                            <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+                            </p>
+                            <p>
+                                Some sample code
+                            </p>
+                            <div class="well">
+                                <code>
+                                    var wwd = new WorldWind.WorldWindow("canvasOne");<br/>
+                                    var layers = [<br/>
+                                        {layer: new WorldWind.BMNGLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},<br/>
+                                        {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},<br/>
+                                        {layer: new WorldWind.CompassLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}<br/>
+                                    ];
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Function 4 Modal -->
+    <div class="modal fade" id="functionModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                            <h2>Function 4</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/function/function4.png" alt="">
+                            <br/>
+                            <p>
+                                Function description goes here
+                            </p>
+                            <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+                            </p>
+                            <p>
+                                Some sample code
+                            </p>
+                            <div class="well">
+                                <code>
+                                    var wwd = new WorldWind.WorldWindow("canvasOne");<br/>
+                                    var layers = [<br/>
+                                        {layer: new WorldWind.BMNGLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},<br/>
+                                        {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},<br/>
+                                        {layer: new WorldWind.CompassLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}<br/>
+                                    ];
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Function 5 Modal -->
+    <div class="modal fade" id="functionModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                            <h2>Function 5</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/function/function5.png" alt="">
+                            <br/>
+                            <p>
+                                Function description goes here
+                            </p>
+                            <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+                            </p>
+                            <p>
+                                Some sample code
+                            </p>
+                            <div class="well">
+                                <code>
+                                    var wwd = new WorldWind.WorldWindow("canvasOne");<br/>
+                                    var layers = [<br/>
+                                        {layer: new WorldWind.BMNGLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},<br/>
+                                        {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},<br/>
+                                        {layer: new WorldWind.CompassLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}<br/>
+                                    ];
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Function 6 Modal -->
+    <div class="modal fade" id="functionModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                            <h2>Function 6</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/function/function6.png" alt="">
+                            <br/>
+                            <p>
+                                Function description goes here
+                            </p>
+                            <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+                            </p>
+                            <p>
+                                Some sample code
+                            </p>
+                            <div class="well">
+                                <code>
+                                    var wwd = new WorldWind.WorldWindow("canvasOne");<br/>
+                                    var layers = [<br/>
+                                        {layer: new WorldWind.BMNGLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},<br/>
+                                        {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},<br/>
+                                        {layer: new WorldWind.CompassLayer(), enabled: true},<br/>
+                                        {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}<br/>
+                                    ];
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/creative.js"></script>
+
+</body>
+
+</html>
