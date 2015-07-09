@@ -1,0 +1,730 @@
+{% load staticfiles %}
+{% load custom_filter %}{% load custom_tag %}
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href='{% static "img/du_favicon.ico" %}'>
+
+    <title>Remote Visualization</title>
+    <!-- 3rd party CSS -->
+    <link href='{% static "3rdparty/bootstrap-3.3.0/css/bootstrap.min.css" %}' rel="stylesheet"/>
+    <link href='{% static "3rdparty/font-awesome-4.2.0/css/font-awesome.min.css" %}' rel="stylesheet"/>
+
+    <!-- Base CSS -->
+    <link href='{% static "css/main.css" %}' rel="stylesheet"/>
+    <link href='{% static "css/base.css" %}' rel="stylesheet"/>
+    
+    <!-- World Wind CSS -->
+    <link href='{% static "worldwind/Examples.css" %}' rel="stylesheet"/>
+    <link href='{% static "worldwind/LayerManager/LayerManager.css" %}' rel="stylesheet"/>
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src='{% static "3rdparty/html5shiv-3.7.2/html5shiv.min.js" %}'></script>
+        <script src='{% static "3rdparty/respond.js/respond.min.js" %}'></script>
+    <![endif]-->    
+    </head>
+
+    <body onbeforeunload="stop()" onunload="stop()" class="page">
+        <nav id="banner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img src='{% static "img/du_logo.png" %}' class="navbar-logo">
+                    <a class="navbar-brand" href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    GeoViz &nbsp;-&nbsp; Cloud-based 5D-GeoVisualization with Web World Wind</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row">
+            <!-- Left side controls -->
+            <div id="side-bar-left" class="col-sm-3 col-md-3 col-lg-3 controls panel-row">                
+                <!-- Layer Control -->
+                <div id="panel-dataprop" class="panel panel-default root-panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseLayerControl" class="accordion-toggle">
+                                <img src='{% static "img/icon_layer.png" %}' width="21px" height="21px"> Layer Control
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseLayerControl" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <!-- Base Layer -->
+                            <label>              
+                                Base Layer&nbsp;&nbsp;
+                                <select id="sel-baselayer">
+                                    <option value="0">Blue Marble</option>
+                                    <option value="1">Blue Marble & Landsat</option>
+                                    <option value="2" selected>Bing Aerial with Labels</option>
+                                </select>
+                            </label>
+                            <br/><br/>
+                            <!-- Data Layer -->
+
+                                <!-- Streamflow Rendering -->
+                                <div id="panel-data-layer" class="panel panel-default root-panel">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapseDataLayer" class="accordion-toggle">Data Layer</a>
+                                        </h4>
+                                    </a>
+                                    </div>
+                                    <div id="collapseDataLayer" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <label>
+                                                <input id="check-layer-dust2d" type="checkbox">
+                                                2D Dust Layer
+                                            </label>
+                                            <label class="pull-right">
+                                                <input id="check-layer-dust2d-animation" type="checkbox">
+                                                2D Dust Animation
+                                            </label><br/>
+                                            <label>
+                                                <input id="check-layer-dust3d" type="checkbox">
+                                                3D RayCasting Rendering
+                                            </label>
+                                            <label class="pull-right">
+                                                <input id="check-layer-dust3d-animation" type="checkbox">
+                                                3D RayCasting Animation
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <!-- IsoSurface Rendering -->
+                                <div id="panel-3d-iso" class="panel panel-default root-panel">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse3dIso" class="accordion-toggle">3D Isosurface Rendering</a>
+                                        </h4>
+                                    </a>
+                                    </div>
+                                    <div id="collapse3dIso" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <label>
+                                                IsoValue <input id="isovalue" size="15">&nbsp;&nbsp;
+                                            </label>
+                                            <div class="pull-right">
+                                                <button id="btn-iso-render" type="button" class="btn btn-primary btn-sm">Render</button>&nbsp;
+                                                <button id="btn-iso-remove" type="button" class="btn btn-primary btn-sm">Remove</button>
+                                            </div>
+                                            <!--
+                                            <label>
+                                                <input id="check-layer-iso" type="checkbox">
+                                                3D IsoSurface Rendering
+                                            </label>
+                                            -->
+                                            <br/>
+                                            <label>Time point: <span id="range-3d-iso-text">0</span></label>
+                                            <input id="range-3d-iso" type="range" min=0 max=24 step=1 value=0>
+                                            <br/>
+                                            <button id="btn-iso-animation" type="button" class="btn btn-warning pull-left">Load Animation</button>
+                                            <div class="pull-right">
+                                                <button type="button" id="btn-iso-timeplay" class="btn btn-success disabled"><i class="fa fa-play fa-lg"></i></button>
+                                                <button type="button" id="btn-iso-timepause" class="btn btn-default disabled"><i class="fa fa-pause fa-lg"></i></button>
+                                            </div>
+                                            <!--
+                                            <label>
+                                                <input id="check-layer-iso-animation" type="checkbox">
+                                                3D IsoSurface Animation
+                                            </label>
+                                            -->
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Streamflow Rendering -->
+                                <div id="panel-3d-flow" class="panel panel-default root-panel">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse3dFlow" class="accordion-toggle">3D Stremflow Rendering</a>
+                                        </h4>
+                                    </a>
+                                    </div>
+                                    <div id="collapse3dFlow" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <label>
+                                                <input id="check-layer-flow" type="checkbox" disabled>
+                                                3D StreamFlow
+                                            </label>
+                                            <label class="pull-right">
+                                                <input id="check-layer-flow-animation" type="checkbox" disabled>
+                                                3D StreamFlow Animation
+                                            </label><br/>
+                                            Color&nbsp; 
+                                                <select id="sel-colorramp" disabled>
+                                                    <option>Choose Color Ramp</option>
+                                                    <option value="ocean">Ocean</option>
+                                                    <option value="BuGn">Blue-Green</option>
+                                                </select>
+                                            
+                                            <div class="pull-right">Class&nbsp;
+                                                <select id="sel-colorclass"  disabled>
+                                                    <option>Total Class</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Properties -->
+                <div id="panel-dataprop" class="panel panel-default root-panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseDataProp" class="accordion-toggle"><i class="fa fa-edit fa-lg"></i> Data Properties</a>
+                        </h4>
+                    </a>
+                    </div>
+                    <div id="collapseDataProp" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <!-- Data Variable -->
+                            <label>
+                                2D Display Variable&nbsp;&nbsp;
+                                <select id="var-seq" ></select>
+                            </label>
+                            <br/>
+                            <label>
+                                3D Display Variable&nbsp;&nbsp;
+                                <select id="var-seq-3d"></select>
+                            </label>
+                            <br/>
+                            <label>
+                                Opacity <span id="2d-opacity-text">0.8</span>
+                            </label>
+                            <input id="2d-opacity" type="range" min=0 max=1 step=0.1 value=0.8>  
+                        </div>
+                    </div>
+                </div>
+          
+                <!-- Animation Control -->
+                <!-- 2D -->
+                <div class="panel panel-default root-panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2DAnimation" class="accordion-toggle">
+                                <i class="fa fa-video-camera fa-lg"></i> 2D Animation Control
+                                
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2DAnimation" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div id="alert2d" class="alert alert-danger alert-dismissable" style="display:none;">
+                                <button type="button" class="close" onclick="$('.alert').hide()">&times;</button>
+                                2D Dust Animation Layer is off.
+                            </div>
+                            <label>
+                                Time point: <span id="range-2d-animation-text">0</span>
+                            </label>
+                            <input id="range-2d-animation" type="range" min=0 max=24 step=1 value=0>
+                            <br/>
+                            <div class="pull-right">
+                                <button type="button" id="btn-2dtimeplay" class="btn btn-success disabled"><i class="fa fa-play fa-lg"></i></button>
+                                <button type="button" id="btn-2dtimepause" class="btn btn-default disabled"><i class="fa fa-pause fa-lg"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 3D -->
+                <div class="panel panel-default root-panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse3DAnimation" class="accordion-toggle">
+                                <i class="fa fa-video-camera fa-lg"></i> 3D Animation Control
+                                
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3DAnimation" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div id="alert3d" class="alert alert-danger alert-dismissable" style="display:none;">
+                                <button type="button" class="close" onclick="$('.alert').hide()">&times;</button>
+                                3D Dust Animation Layer is off.
+                            </div>
+                            <label>
+                                Time point: <span id="range-3d-animation-text">0</span>
+                            </label>
+                            <input id="range-3d-animation" type="range" min=0 max=24 step=1 value=0>
+                            <br/>
+                            <div class="pull-right">
+                                <button type="button" id="btn-timeplay" class="btn btn-success disabled"><i class="fa fa-play fa-lg"></i></button>
+                                <button type="button" id="btn-timepause" class="btn btn-default disabled"><i class="fa fa-pause fa-lg"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Enter Coordinates To Place Marker -->
+                <div class="panel panel-default root-panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" href="#collapsePlaceMarker" class="accordion-toggle">
+                            <i class="fa fa-map-marker fa-lg"></i> Place Marker</a>
+                        </h4>  
+                    </div>
+                    <div id="collapsePlaceMarker" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label>Lat</label>
+                                        <input id="marker-position-lat" name="camera-position-lat" class="form-control" placeholder="0" autocomplete="off">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label>Long</label>
+                                        <input id="marker-position-long" name="camera-position-long" class="form-control" placeholder="0" autocomplete="off">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label>Alt (m)</label>
+                                        <input id="marker-position-alt" name="camera-position-alt" class="form-control" placeholder="0" autocomplete="off">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <br/>
+                                        <button type="button" id="btn-placeMarker" class="btn btn-warning btn-lg btn-block">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--
+                            <a type="button" id="btn-download" class="btn btn-warning btn-lg btn-block" href="" download="wwconfig.txt">Download Config</a>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- World Wind Window -->
+            <div id="divWorldWindowContainer" class="col-sm-6 col-md-6 col-lg-6" style="background:#7F7F7F">
+                <br/>
+                <!--
+                <div id="divLayerManager">
+                </div>
+                -->
+                <div id="globe">
+                    <div id="divWorldWindow" style="position:relative">
+                        <canvas id="canvasOne" width="800" height="800" style="width: 100%; height: auto">
+                            Your browser does not support HTML5 Canvas.
+                        </canvas>
+                        <!--
+                        <div id="coordinateOverlay">
+                            <span id="terrainLatitude"></span>
+                            <span id="terrainLongitude"></span>
+                            <span id="terrainElevation"></span>
+                            <span id="eyeAltitudeLabel">Eye Alt</span>
+                            <span id="eyeAltitude"></span>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right side panel -->
+            <div id="side-bar-right" class="col-sm-3 col-md-3 col-lg-3 controls panel-row">
+                <!-- Cloud Configuration -->
+                <div class="panel panel-default root-panel">
+                  <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" href="#collapseCloud" class="accordion-toggle">
+                            <i class="fa fa-cloud fa-lg"></i> Cloud Configuration</a>
+                        </h4>
+                  </div>
+                  <div id="collapseCloud" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <!-- Server Region -->
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseRegion"><i class="fa fa-map-marker fa-lg"></i> Server Region</a>
+                          </h4>
+                        </div>
+                        <div id="collapseRegion" class="panel-collapse collapse in">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label>Amazon EC2 Region</label><br/>
+                              <select id="sel-region">
+                                <option>-- Choose a region --</option>
+                                <option value="1">US West (Oregon)</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Machine Configuration -->
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseMachineConf"><i class="fa fa-gear fa-lg"></i> Machine Configuration</a>
+                          </h4>
+                        </div>
+                        <div id="collapseMachineConf" class="panel-collapse collapse in">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label>Instance Type</label><br/>
+                              <select id="sel-machineconf">
+                                <option>-- Choose a type --</option>
+                                <option value="1">g2.2xlarge</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Resources Allocation -->
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseResource"><i class="fa fa-sitemap fa-lg"></i> Resources Allocation</a>
+                          </h4>
+                        </div>
+                        <div id="collapseResource" class="panel-collapse collapse in">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label>Number of GPU tasks</label><br/>
+                              <select id="sel-numprocessor">
+                                <option>-- Choose a number --</option>
+                                <option value="1">1</option>
+                                <option value="4">4</option>
+                                <option value="9">9</option>
+                                <option value="16">16</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--<input id="txt-node-sequence" class="form-control" placeholder="Type in sequence here. Separate with comma."><br/>
+                      <a id="btn-downloadconfig" type="button" class="btn btn-primary btn-lg btn-block">Download Config</a>-->
+                      <button id="btn-startcluster" type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#myModal">Start Cloud Cluster</button>
+                      <input id="url-startcluster" type="hidden" value="{% setting 'ROOT_APP_URL' %}/startcluster/"></input>
+                      <input id="url-writeconfig-ray" type="hidden" value="{% setting 'ROOT_APP_URL' %}/writeconfig_ray/"></input>
+					  <input id="url-writeconfig-iso" type="hidden" value="{% setting 'ROOT_APP_URL' %}/writeconfig_iso/"></input>
+					  <input id="url-writeconfig-flow" type="hidden" value="{% setting 'ROOT_APP_URL' %}/writeconfig_flow/"></input>
+                      <input id="url-terminatecluster" type="hidden" value="{% setting 'ROOT_APP_URL' %}/terminatecluster/"></input>
+                      <div class="appstop" id="app-status"></div>
+                      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">GeoViz Cloud GPU</h4>
+                                </div>
+                                <div class="modal-body">
+                                    The GPU cloud cluster is being launched.<br/>
+                                    Please wait until the cloud cluster is ready to use.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel2">GeoViz Cloud GPU</h4>
+                                </div>
+                                <div class="modal-body">
+                                    The GPU cloud cluster is terminated.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Data Source -->
+                <div class="panel panel-default root-panel">
+                  <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" href="#collapseDataSource" class="accordion-toggle">
+                            <i class="fa fa-database fa-lg"></i> Data Source</a>
+                        </h4>
+                  </div>
+                  <div id="collapseDataSource" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <div class="panel-group" id="panelgroup-datasource">
+                        <!-- Data on Server -->
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#panelgroup-datasource" href="#collapseDataServer">Data on Server</a>
+                            </h4>
+                          </div>
+                          <div id="collapseDataServer" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                              <div class="table-responsive">
+                                <label>/root/data/</label>
+                                <select id="sel-datafile">
+                                  <option>-- Choose a file --</option>
+                                  <option>dust2d.nc</option>
+                                  <option>nmmnew.nc</option>
+                                </select>
+    <!--
+                                <table class="table table-hover table-noborder">
+                                  <thead></thead>
+                                  <tbody>
+                                    <tr><td><i class="fa fa-folder-o fa-lg"></i> /root/data/</td></tr>
+                                    <tr><td><i class="fa fa-file-o fa-lg"></i> dust2d.nc</td></tr>
+                                    <tr><td><i class="fa fa-file-o fa-lg"></i> dust2dd.nc</td></tr>
+                                    <tr><td><i class="fa fa-file-o fa-lg"></i> nmm.nc</td></tr>
+                                  </tbody>
+                                </table>
+    -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Open DAP -->
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#panelgroup-datasource" href="#collapseDataOpendap">OPeNDAP Server - NASA</a>
+                            </h4>
+                          </div>
+                          <div id="collapseDataOpendap" class="panel-collapse collapse">
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                  <label>Latitude</label>
+                                  <input class="form-control" autocomplete="off">
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                  <label>Longitude</label>
+                                  <input class="form-control" autocomplete="off">
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                  <label>Time</label>
+                                  <input class="form-control" autocomplete="off">
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                  <label>Parameter</label>
+                                  <input class="form-control" autocomplete="off">
+                                  <br/>
+                                  <button type="button" class="btn btn-warning btn-lg btn-block">Get Data</button>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Data URL:</label>
+                                <input class="form-control" value="http://opendap.jpl.nasa.gov:80/opendap/GeodeticsGravity/tellus/L3/gldas_monthly/netcdf/GLDAS_NOAH10_M.A200101_201408.totalH2O.nc" autocomplete="off">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- User Upload -->
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#panelgroup-datasource" href="#collapseDataUserUpload">Upload Data</a>
+                            </h4>
+                          </div>
+                          <div id="collapseDataUserUpload" class="panel-collapse collapse">
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <input type="file">
+                                <br/>
+                                <button type="button" class="btn btn-warning btn-lg btn-block">Upload</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <button type="button" id="btn-loaddata" class="btn btn-warning btn-lg btn-block">Load Data</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <form action="" method="post">{% csrf_token %}</form>
+        </div><!-- /.container -->
+
+
+        <!-- Bottom JavaScript -->
+        <!-- 3rd party JS -->
+        <script src="{% static '3rdparty/jquery-11.1.1/jquery.min.js' %}"></script>
+        <script src='{% static "3rdparty/jquery.cookie/jquery.cookie.js" %}'></script>
+        <script src="{% static '3rdparty/bootstrap-3.3.0/js/bootstrap.min.js' %}"></script>
+        <script src="{% static '3rdparty/bootstrap-3.3.0/js/ie10-viewport-bug-workaround.js' %}"></script>
+        
+        <!-- World Wind JS -->
+        <script data-main="WWRemoteViz" src="{% static 'worldwind/require.js' %}"></script>
+    
+        <!-- Script for style -->
+        <script>
+            /* launch gpu instance */
+            function startcluster(){
+                var csrftoken = $.cookie('csrftoken');
+                var url=$("#url-startcluster").val();
+                var form_content = 
+                    '<form id="hidden-post-form-startcluster" action="'+url+'" method="POST">'+
+                        '<input type="hidden" name="csrfmiddlewaretoken" value="'+csrftoken+'">'+
+                        '<input type="hidden" name="gpunum" value="'+$("#sel-numprocessor").val()+'">'+
+                    '</form>';
+                var form = $(""+form_content);
+                //$("#btn-startcluster").click(function(){terminatecluster();});
+                form.appendTo('body').submit();
+            }
+            
+            /* terminate gpu instance */
+            function terminatecluster(){
+                var csrftoken = $.cookie('csrftoken');
+                var url=$("#url-terminatecluster").val();
+                var form_content = 
+                    '<form id="hidden-post-form-terminatecluster" action="'+url+'" method="POST">'+
+                        '<input type="hidden" name="csrfmiddlewaretoken" value="'+csrftoken+'">'+
+                        '<input type="hidden" name="gpunum" value="'+$("#sel-numprocessor").val()+'">'+
+                    '</form>';
+                var form = $(""+form_content);
+                //$("#btn-startcluster").click(function(){startcluster();});
+                form.appendTo('body').submit();
+            }
+            
+            $("#btn-startcluster").click(function(){startcluster();});
+
+            if ("{{region}}"){$("#sel-region").val("{{region}}");}
+            if ("{{instancetype}}"){$("#sel-machineconf").val("{{instancetype}}");}
+            if ("{{gpunum}}"){$("#sel-numprocessor").val("{{gpunum}}");}
+            if ("{{startcluster}}"){
+                if ("{{startcluster}}" == "yes"){
+                    $("#btn-startcluster").html("Terminate Cloud Cluster");
+                    if ($("#btn-startcluster").hasClass("btn-success")){
+                        $("#btn-startcluster").removeClass("btn-success");
+                        $("#btn-startcluster").addClass("btn-danger");
+                        $("#btn-startcluster").attr('data-target','#myModal2');
+                        $("#myModal").css("top","100px");
+                        $("#myModal").modal('toggle');
+                        $("#myModal").modal('show');
+                        $("#btn-startcluster").click(function(){terminatecluster();});
+                    }
+                }
+                if ("{{terminatecluster}}" == "yes"){
+                    $("#btn-startcluster").html("Start Cloud Cluster");
+                    if ($("#btn-startcluster").hasClass("btn-danger")){
+                        $("#btn-startcluster").removeClass("btn-danger");
+                        $("#btn-startcluster").addClass("btn-success");
+                        $("#btn-startcluster").attr('data-target','#myModal');
+                        $("#myModal2").css("top","100px");
+                        $("#myModal2").modal('toggle');
+                        $("#myModal2").modal('show');
+                        $("#btn-startcluster").click(function(){startcluster();});
+                    }
+                }
+            }
+            
+            
+            for (var t = 0; t < 20; t++) {
+                $("#sel-3d-starttime").append($('<option>', { 
+                    value: t,
+                    text : t 
+                }));
+                $("#sel-3d-endtime").append($('<option>', { 
+                    value: t,
+                    text : t 
+                }));
+            }
+            
+            $("#btn-loaddata").click(function(){
+                var varlist = jQuery.parseJSON('{{varlist|safe}}');
+                $.each(varlist,function(index,value){
+                    $("#var-seq").append($('<option>', { 
+                    value: value,
+                    text : value 
+                    }));
+                });
+                var var3dlist = jQuery.parseJSON('{{var3dlist|safe}}');
+				var var3dlistflow = jQuery.parseJSON('{{var3dlistflow|safe}}');
+				if($("#sel-datafile").val()=="dust2d.nc"){
+                                        $("#var-seq-3d").empty();
+					$.each(var3dlist,function(index,value){
+						$("#var-seq-3d").append($('<option>', { 
+						value: value,
+						text : value 
+						}));
+					});
+				}
+				else if($("#sel-datafile").val()=="nmmnew.nc"){
+                                        $("#var-seq-3d").empty();
+					$.each(var3dlistflow,function(index,value){
+						$("#var-seq-3d").append($('<option>', { 
+						value: value,
+						text : value 
+						}));
+					});
+				}
+            });
+
+            $("#sel-datafile").change(function(){
+                    if($("#sel-datafile").val()=="dust2d.nc")
+                    {
+                        if(!$("#check-layer-flow").is(':disabled'))
+                        {
+                            $("#check-layer-flow").prop('disabled', true);
+                        }
+                        if(!$("#check-layer-flow-animation").is(':disabled'))
+                        {
+                            $("#check-layer-flow-animation").prop('disabled',true);
+                        }
+						if(!$("#sel-colorramp").is(':disabled'))
+                        {
+                            $("#sel-colorramp").prop('disabled',true);
+                        }
+						if(!$("#sel-colorclass").is(':disabled'))
+                        {
+                            $("#sel-colorclass").prop('disabled',true);
+                        }
+                    }
+                    else if($("#sel-datafile").val()=="nmmnew.nc")
+                    {
+                        if($("#check-layer-flow").is(':disabled'))
+                        {
+                            $("#check-layer-flow").prop('disabled',false);
+                        }
+                        if($("#check-layer-flow-animation").is(':disabled'))
+                        {
+                            $("#check-layer-flow-animation").prop('disabled',false);
+                        }
+						if($("#sel-colorramp").is(':disabled'))
+                        {
+                            $("#sel-colorramp").prop('disabled',false);
+                        }
+						if($("#sel-colorclass").is(':disabled'))
+                        {
+                            $("#sel-colorclass").prop('disabled',false);
+                        }
+                    }
+            });
+            /*
+            $("#btn-timeplay").click(function(){"btn btn-success btn-circle"
+              if($(this).hasClass("btn-success")){
+                $(this).attr({class:"btn btn-warning btn-circle"});
+                $(this).html('<i class="fa fa-pause fa-lg"></i>');
+              }
+              else{
+                $(this).attr({class:"btn btn-success btn-circle"});
+                $(this).html('<i class="fa fa-play fa-lg"></i>');
+              }
+            });
+            */
+        </script>
+    </body>
+</html>
