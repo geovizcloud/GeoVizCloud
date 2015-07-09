@@ -1,0 +1,251 @@
+.header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #222;
+	color: #eee;
+    height: 35px;
+}
+
+.header > div {
+    float: left;
+    line-height: normal;
+    margin: 0;
+    padding: 5px;
+    padding-top: 0;
+    height: 30px;
+}
+
+/* ========================= Control panel ================================== */
+#side-bar-left{
+	padding-left: 15px;
+}
+
+#side-bar-right{
+	padding-right: 15px;
+}
+
+.panel-heading  a{
+	color:rgb(51,51,51);
+	text-decoration: none;
+}
+
+.panel-heading a:hover{
+	text-decoration: none;
+}
+
+.panel-heading .accordion-toggle:after {
+    font-family: 'FontAwesome';
+    content: "\f068";
+    float: right; 
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\f078";
+}
+
+.control-panel {
+    width: 320px;
+    border-right: 1px solid black;
+    z-index: 10;
+    overflow: auto;
+}
+
+.panel-row {
+	margin-top: 50px;
+	padding: 0px;
+}
+
+.well {
+	margin-bottom: 0px;
+}
+
+/* ========================= Override default ParaView css ================================== */
+.paraview.toolbar.viewport li.on {
+    background: #555;
+}
+
+.paraview.toolbar li:hover, .paraview.toolbar.viewport li.on:hover {
+    background: #777;
+}
+
+.logo{
+	background: None;
+}
+
+.logo.on{
+	background: #555;
+}
+
+.logo:hover, .logo.on:hover{
+	background: #eee
+}
+body {
+	padding-top: 50px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+.container{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.controls{
+	-webkit-background-clip: border-box;
+	-webkit-background-origin: padding-box;
+	-webkit-background-size: auto;
+	-webkit-box-shadow: rgba(0,0,0,0.2) 0px 0px 15px 0px;
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: rgba(255,255,255,0.8);
+	background-image: none;
+	background-origin: padding-box;
+	background-size: auto;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	box-shadow: rgba(0,0,0,0.2) 0px 0px 15px 0px;
+	color: rgb(85,85,85);
+	cursor: auto;
+	display: block;
+	padding: 0px;
+	z-index: 1000;
+}
+
+.controls-left{
+	float:left;
+}
+
+.controls-right{
+	position: absolute;
+	right: 0px;
+	float:right;
+}
+
+.panel-heading,.panel-body,.panel-collapse{
+	background-color: rgba(255,255,255,0.8);
+}
+
+.btn-gray {
+	color: #fff;
+	background-color: #444;
+	border-color: rgba(0,0,0,0.2);
+}
+
+.btn-gray:hover,
+.btn-gray:focus,
+.btn-gray:active,
+.btn-gray.active,
+.open .dropdown-toggle.btn-gray{
+	color: #fff;
+	background-color: #303030;
+	border-color: rgba(0,0,0,0.2);
+}
+
+.btn-gray:active,
+.btn-gray.active,
+.open .dropdown-toggle.btn-gray{
+	background-image: none;
+}
+
+.btn-gray.disabled,
+.btn-gray[disabled],
+fieldset[disabled] .btn-gray,
+.btn-gray.disabled:hover,
+.btn-gray[disabled]:hover,
+fieldset[disabled] .btn-gray:hover,
+.btn-gray.disabled:focus,
+.btn-gray[disabled]:focus,
+fieldset[disabled] .btn-gray:focus,
+.btn-gray.disabled:active,
+.btn-gray[disabled]:active,
+fieldset[disabled] .btn-gray:active,
+.btn-gray.disabled.active,
+.btn-gray[disabled].active,
+fieldset[disabled] .btn-gray.active,{
+	background-color:#444;
+	border-color:rgba(0,0,0,0.2);
+}
+
+.navbar-logo{
+	float: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	margin-right: 50px;
+}
+
+.navbar{
+	background-color: #333;
+}
+
+.navbar-inverse
+.navbar-brand{
+	color: #e3e3e3;
+	font-size: 24px;
+	font-weight: bold;
+	margin-left: 50px !important;
+}
+
+.root-panel{
+	margin: 2px;
+}
+
+.side-bar {
+	margin-top: 5px;
+	padding: 0px;
+	background-color: rgba(0,0,0,1);
+}
+
+.side-bar-left{
+	border-bottom-left-radius: 0px;
+	border-top-left-radius: 0px;
+}
+
+.side-bar-right{
+	border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.side-bar .panel-title{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.side-bar label{
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.table>tbody>tr>td {
+	border-top: 0px;
+}
+
+.pv-viewport{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+}
+
+.dummy-img {
+	margin-left: 25%;
+}
+
+#refresh-view-img {
+	vertical-align: top;
+	max-width: 100%;
+	height: auto;
+}
+
+div.hopscotch-bubble {
+	font-size: 16px;
+}

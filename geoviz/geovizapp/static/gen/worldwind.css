@@ -1,0 +1,186 @@
+/* @version $Id: Examples.css 2677 2015-01-24 01:09:14Z tgaskins $ */
+body {
+    font-family: 'Oswald', 'Futura', sans-serif;
+    margin: 0px;
+    padding: 0px;
+	background-color: #fff;
+}
+
+#page {
+    margin: 0px auto 0px auto;
+}
+
+#divLayerManager {
+    float: left;
+    width: 300px;
+    height: 600px;
+    margin: 5px;
+    border: 2px solid #000066;
+}
+
+#divWorldWindowContainer {
+    padding: 0px;
+}
+
+#globe {
+    float: left;
+    margin: 32px 0px 0px 0px;
+    border: 0px solid #000066;
+}
+
+#divWorldWindow {
+    float: left;
+    margin: 50px;
+    border: 0px solid #000066;
+}
+
+@media only screen and (max-device-width: 1050px) {
+    #divLayerManager {
+        float: left;
+        width: 250px;
+        height: 600px;
+        margin: 5px;
+        border: 2px solid #000066;
+    }
+}
+
+/* @version $Id: CoordinateController.css 3083 2015-05-08 18:30:32Z dcollins $ */
+
+/* Coordinate overlay common attributes. */
+#coordinateOverlay {
+    color: yellow;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: lighter;
+    text-shadow: 0px 0px 2px black;
+    pointer-events: none; /* ignore mouse and touch events in the coordinate overlay */
+}
+
+/* Coordinate overlay terrain latitude. */
+#terrainLatitude {
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+    margin: 0px 5px 0px 5px;
+}
+
+/* Coordinate overlay terrain longitude. */
+#terrainLongitude {
+    display: inline-block;
+    width: 65px;
+    text-align: right;
+    margin: 0px 5px 0px 5px;
+}
+
+/* Coordinate overlay terrain elevation. */
+#terrainElevation {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+}
+
+/* Coordinate overlay eye altitude label. */
+#eyeAltitudeLabel {
+    margin: 0px 5px 0px 20px;
+}
+
+/* Coordinate overlay position in medium to large viewports. */
+@media (min-width: 992px)  {
+    #coordinateOverlay {
+        position: absolute;
+        bottom: 10px;
+        left: 260px;
+    }
+}
+
+/* Coordinate overlay position in small viewports. */
+@media (max-width: 992px) {
+    #coordinateOverlay {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+}
+
+/* @version $Id: LayerManager.css 2746 2015-02-06 18:51:30Z tgaskins $ */
+ul {
+    background-color: #584f4d;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #ec8b68;
+    color: #fff;
+    border-top: 1px solid #fe9772;
+    border-bottom: 1px solid #9f593f;
+    font-size: 18px;
+    letter-spacing: .05em;
+    list-style-type: none;
+    text-shadow: 2px 2px 1px #9f593f;
+    height: 30px;
+    padding-left: 1em;
+    padding-top: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.layerManager {
+    background-color: #e99295;
+    color: #fff;
+    border: none
+}
+
+.projectionDivOuter {
+    margin: 5px 5px 10px 5px;
+}
+
+.projectionForm {
+    background-color: #d7666b;
+    margin: 0 auto 0 auto;
+}
+
+.projectionDivInner {
+    width: 85%;
+    margin: 0 auto 0 auto;
+    padding: 15px 5px 15px 5px;
+}
+
+.projectionLabel {
+    padding-right: 15px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.layersFieldset {
+    border: none;
+    padding: 0;
+    margin: 5px;
+}
+
+.layerEnabled {
+    background-color: #d7666b;
+    color: #fff;
+    text-shadow: 2px 2px 1px #914141;
+    border-top: 1px solid #e99295;
+    border-bottom: 1px solid #914141;
+}
+
+.layerDisabled {
+}
+
+.layerVisible {
+    background-color: #d7666b;
+    color: #fff;
+    text-shadow: 2px 2px 1px #914141;
+    border-top: 1px solid #e99295;
+    border-bottom: 1px solid #914141;
+    font-style: italic;
+}
